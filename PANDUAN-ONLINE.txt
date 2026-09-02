@@ -1,0 +1,10 @@
+ELANGKREATOR-OFFICIAL — PANDUAN ONLINE
+
+1. Buka index.html untuk melihat website.
+2. Folder assets berisi dua ebook:
+   - 7-langkah-awal-menghasilkan-uang-dari-internet.pdf
+   - buku-sukses-di-era-fb-pro.pdf
+3. Upload SELURUH folder website ke hosting agar tombol ebook bekerja.
+4. Untuk tombol pembelian, website memakai WhatsApp 081280380626. Pembayaran belum otomatis.
+5. Jika ingin checkout otomatis, nanti bisa ditambahkan payment gateway setelah akun/metode pembayaran ditentukan.
+6. Untuk mengganti teks, buka index.html lalu edit bagian yang diperlukan.
