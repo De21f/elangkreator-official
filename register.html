@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daftar | ELANGKREATOR-OFFICIAL</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg:#080817;
+--panel:#11112a;
+--text:#ffffff;
+--muted:#b9bad0;
+--purple:#8b5cf6;
+--teal:#20d6c7;
+--line:rgba(255,255,255,.1);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Inter,sans-serif;
+background:linear-gradient(180deg,#080817,#10102b);
+color:#fff;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
+
+.card{
+width:100%;
+max-width:500px;
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(20px);
+border:1px solid var(--line);
+border-radius:28px;
+padding:35px;
+box-shadow:0 25px 70px rgba(0,0,0,.35);
+}
+
+.logo{
+text-align:center;
+font-size:22px;
+font-weight:800;
+margin-bottom:10px;
+}
+
+.logo span{
+background:linear-gradient(90deg,#b78cff,#48efe1);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+h1{
+font-family:Manrope,sans-serif;
+font-size:34px;
+text-align:center;
+margin-bottom:10px;
+}
+
+.sub{
+text-align:center;
+color:var(--muted);
+margin-bottom:30px;
+font-size:14px;
+}
+
+.group{
+margin-bottom:18px;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-size:14px;
+font-weight:600;
+}
+
+input{
+width:100%;
+padding:15px;
+border-radius:14px;
+border:1px solid rgba(255,255,255,.1);
+background:rgba(255,255,255,.05);
+color:#fff;
+font-size:15px;
+outline:none;
+}
+
+input:focus{
+border-color:#8b5cf6;
+}
+
+.btn{
+width:100%;
+padding:15px;
+border:none;
+border-radius:14px;
+background:linear-gradient(135deg,#8b5cf6,#6240d8);
+color:#fff;
+font-weight:800;
+cursor:pointer;
+font-size:15px;
+margin-top:10px;
+}
+
+.message{
+margin-top:15px;
+text-align:center;
+font-size:14px;
+}
+
+.footer{
+text-align:center;
+margin-top:25px;
+font-size:14px;
+color:var(--muted);
+}
+
+.footer a{
+color:#fff;
+font-weight:700;
+text-decoration:none;
+}
+
+.home{
+display:block;
+text-align:center;
+margin-top:20px;
+color:var(--teal);
+text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="logo">
+🦅 <span>ELANGKREATOR-OFFICIAL</span>
+</div>
+
+<h1>Daftar Akun</h1>
+
+<p class="sub">
+Buat akun gratis dan mulai perjalanan kreatormu.
+</p>
+
+<form id="registerForm">
+
+<div class="group">
+<label>Nama Lengkap</label>
+<input
+type="text"
+id="nama"
+required
+placeholder="Masukkan nama lengkap">
+</div>
+
+<div class="group">
+<label>Email</label>
+<input
+type="email"
+id="email"
+required
+placeholder="Masukkan email">
+</div>
+
+<div class="group">
+<label>Password</label>
+<input
+type="password"
+id="password"
+required
+placeholder="Minimal 6 karakter">
+</div>
+
+<button
+type="submit"
+class="btn">
+Daftar Sekarang
+</button>
+
+</form>
+
+<div id="message" class="message"></div>
+
+<div class="footer">
+Sudah punya akun?
+<a href="login.html">
+Masuk
+</a>
+</div>
+
+<a href="index.html" class="home">
+← Kembali ke Beranda
+</a>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+"https://hnmhtbyocyxeiyldhama.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_OUBFgLLffsDVCb9D786ToQ_9_L_LOaF";
+
+const supabase =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+document
+.getElementById("registerForm")
+.addEventListener("submit", async (e)=>{
+
+e.preventDefault();
+
+const nama =
+document.getElementById("nama").value;
+
+const email =
+document.getElementById("email").value;
+
+const password =
+document.getElementById("password").value;
+
+const message =
+document.getElementById("message");
+
+message.innerHTML =
+"Memproses pendaftaran...";
+
+const { data, error } =
+await supabase.auth.signUp({
+email,
+password
+});
+
+if(error){
+
+message.style.color =
+"#ff8b8b";
+
+message.innerHTML =
+error.message;
+
+return;
+
+}
+
+message.style.color =
+"#7CFFB2";
+
+message.innerHTML =
+"Pendaftaran berhasil. Silakan login.";
+
+setTimeout(()=>{
+
+window.location.href =
+"login.html";
+
+},1500);
+
+});
+</script>
+
+</body>
+</html>
