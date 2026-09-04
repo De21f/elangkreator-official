@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Dashboard Member | ELANGKREATOR-OFFICIAL</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--bg:#080817;
+--panel:#11112a;
+--panel2:#17173a;
+--text:#ffffff;
+--muted:#b9bad0;
+--purple:#8b5cf6;
+--teal:#20d6c7;
+--line:rgba(255,255,255,.1);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Inter,sans-serif;
+background:linear-gradient(180deg,#080817,#10102b);
+color:#fff;
+min-height:100vh;
+padding:30px;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.logo{
+font-size:22px;
+font-weight:800;
+}
+
+.logo span{
+background:linear-gradient(90deg,#b78cff,#48efe1);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.logout{
+background:#ff4d4d;
+border:none;
+padding:12px 18px;
+border-radius:12px;
+color:#fff;
+font-weight:700;
+cursor:pointer;
+}
+
+.card{
+background:rgba(255,255,255,.05);
+border:1px solid var(--line);
+border-radius:24px;
+padding:30px;
+margin-bottom:25px;
+backdrop-filter:blur(20px);
+}
+
+h1{
+font-family:Manrope,sans-serif;
+margin-bottom:10px;
+}
+
+.muted{
+color:var(--muted);
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-top:25px;
+}
+
+.box{
+background:rgba(255,255,255,.05);
+padding:25px;
+border-radius:20px;
+border:1px solid var(--line);
+}
+
+.box h3{
+margin-bottom:10px;
+}
+
+.status{
+display:inline-block;
+padding:8px 12px;
+border-radius:999px;
+background:#1b1f44;
+font-size:13px;
+font-weight:700;
+}
+
+.btn{
+display:inline-block;
+padding:14px 20px;
+border-radius:14px;
+font-weight:700;
+text-decoration:none;
+margin-top:15px;
+}
+
+.btn-primary{
+background:linear-gradient(135deg,#8b5cf6,#6240d8);
+color:#fff;
+}
+
+.btn-home{
+background:#1d234f;
+color:#fff;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<div class="logo">
+🦅 <span>ELANGKREATOR-OFFICIAL</span>
+</div>
+
+<button class="logout" onclick="logout()">
+Logout
+</button>
+
+</div>
+
+<div class="card">
+
+<h1>Dashboard Member</h1>
+
+<p class="muted">
+Selamat datang kembali.
+</p>
+
+<br>
+
+<p>
+<b>Email :</b>
+<span id="userEmail">
+Memuat...
+</span>
+</p>
+
+<br>
+
+<p>
+<b>Status :</b>
+<span class="status" id="userStatus">
+FREE
+</span>
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="box">
+
+<h3>🎁 Ebook Gratis</h3>
+
+<p class="muted">
+Akses ebook gratis untuk memulai.
+</p>
+
+<a
+class="btn btn-primary"
+href="assets/7-langkah-awal-menghasilkan-uang-dari-internet.pdf"
+download>
+
+Download
+
+</a>
+
+</div>
+
+<div class="box">
+
+<h3>🚀 Ebook Premium</h3>
+
+<p class="muted">
+Konten eksklusif untuk member premium.
+</p>
+
+<a
+class="btn btn-primary"
+id="premiumBtn"
+href="#">
+
+Upgrade Member
+
+</a>
+
+</div>
+
+<div class="box">
+
+<h3>🏠 Beranda</h3>
+
+<p class="muted">
+Kembali ke halaman utama.
+</p>
+
+<a
+class="btn btn-home"
+href="index.html">
+
+Beranda
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+"https://hnmhtbyocyxeiyldhama.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_OUBFgLLffsDVCb9D786ToQ_9_L_LOaF";
+
+const supabase =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+async function cekUser(){
+
+const {
+data:{session}
+}
+=
+await supabase.auth.getSession();
+
+if(!session){
+
+window.location.href =
+"login.html";
+
+return;
+
+}
+
+document.getElementById(
+"userEmail"
+).innerText =
+session.user.email;
+
+}
+
+cekUser();
+
+async function logout(){
+
+await supabase.auth.signOut();
+
+window.location.href =
+"login.html";
+
+}
+
+</script>
+
+</body>
+</html>
