@@ -252,7 +252,26 @@ await supabase.auth.signUp({
 email,
 password
 });
+const { data: loginData } =
+await supabase.auth.signInWithPassword({
+  email,
+  password
+});
 
+if(loginData?.user){
+
+await supabase
+.from("members")
+.insert([
+{
+id: loginData.user.id,
+nama: nama,
+email: email,
+status: "free"
+}
+]);
+
+}
 if(error){
 
 message.style.color =
